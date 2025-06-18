@@ -6,7 +6,7 @@ const Home = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-gradient-to-br from-blue-900 to-black text-white">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-400 to-green-500 bg-clip-text text-transparent mb-12 text-center">
-        Welcome to QueryVision AI
+        Welcome to IZARA AI
       </h1>
 
       <div className="flex flex-col sm:flex-row gap-8 w-full max-w-4xl justify-center items-center cursor-pointer">
