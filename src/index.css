@@ -1,3 +1,91 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Font */
+.minecraft-font {
+  font-family: 'Press Start 2P', cursive;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Pixel Console Background */
+.pixel-bg {
+  background: #000;
+  position: relative;
+}
+
+/* Pixel Borders */
+.pixel-border {
+  border: 2px solid #22c55e;
+  box-shadow: 0 0 6px #22c55e, inset 0 0 4px #22c55e;
+  border-radius: 3px;
+}
+
+/* Pixel-styled button */
+.pixel-btn {
+  background: #22c55e;
+  color: black;
+  font-weight: bold;
+  font-family: 'Press Start 2P', cursive;
+  padding: 6px 10px;
+  border: 2px solid #166534;
+  box-shadow: 2px 2px 0 #000;
+  transition: all 0.1s;
+}
+.pixel-btn:hover {
+  background: #4ade80;
+}
+.pixel-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: none;
+}
+
+/* Scanline effect */
+.pixel-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(34, 197, 94, 0.05) 0px,
+    rgba(34, 197, 94, 0.05) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  pointer-events: none;
+}
+
+/* Blinking cursor */
+.blink-cursor::after {
+  content: "_";
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Floating background stars */
+.floating-objects .star {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #22c55e;
+  box-shadow: 0 0 4px #22c55e;
+  border-radius: 1px;
+  top: 20%;
+  left: 10%;
+  animation: float 12s linear infinite;
+}
+.floating-objects .star.delay-1 { top: 40%; left: 70%; animation-delay: 2s; }
+.floating-objects .star.delay-2 { top: 70%; left: 30%; animation-delay: 4s; }
+.floating-objects .star.delay-3 { top: 50%; left: 90%; animation-delay: 6s; }
+.floating-objects .star.delay-4 { top: 80%; left: 50%; animation-delay: 8s; }
+
+@keyframes float {
+  from { transform: translateY(0) translateX(0); opacity: 1; }
+  to { transform: translateY(-150px) translateX(30px); opacity: 0; }
+}
