@@ -1,5 +1,7 @@
 # IZARA-AI 🤖✨
 
+![IZARA-AI Demo](/izara.gif)
+
 ## App Description 📝  
 IZARA-AI is a full-stack AI assistant that provides intelligent responses to user queries. It features:
 
