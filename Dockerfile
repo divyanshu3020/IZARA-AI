@@ -1,4 +1,4 @@
-# --- STAGE 1: BUILD STATE ---
+# --- STAGE 1: BUILD THE VITE SITE ---
 FROM node:18-alpine AS builder
 WORKDIR /app
 
@@ -6,24 +6,21 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 
-# Copy code and build production files
+# Copy code and build production static files
 COPY . .
 RUN npm run build
 
-# --- STAGE 2: PRODUCTION RUNTIME ---
-FROM node:18-alpine AS runner
-WORKDIR /app
+# --- STAGE 2: PRODUCTION RUNTIME (NGINX) ---
+FROM nginx:alpine AS runner
 
-ENV NODE_ENV=production
+# Copy the static production files from Vite's dist folder into Nginx's HTML directory
+COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Only copy compiled code and production manifests
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-# If your Express backend code stays outside of dist, copy it here too:
-# COPY --from=builder /app/server.js ./server.js 
+# Fix for Vite routing: Redirects all fallback routes back to index.html to prevent 404 errors on refresh
+RUN echo 'server { listen 80; location / { root /usr/share/nginx/html; index index.html; try_files $uri $uri/ /index.html; } }' > /etc/nginx/conf.d/default.conf
 
-EXPOSE 5000
+# Expose port 80 (Standard web port used by Nginx)
+EXPOSE 80
 
-# Run production script instead of development server
-CMD ["node", "dist/server.js"]
+# Start Nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
