@@ -2,22 +2,21 @@ name: CI pipeline
 
 on:
   push: 
-    branches [main]
+    branches: [main]
 
 jobs:
 build-and-test:
-  runs-on:ubuntu-latest
+  runs-on: ubuntu-latest
 
   steps:
-  -name:checkout repo code
+  -name: checkout repo code
   uses: actions/checkout@v4
 
 
   -name: setup node.jobs
-  uses:actions/setup-node@v4
-  with:
-  node-version:18
-  cache:'npm'
+  uses: actions/setup-node@v4
+  with: node-version:18
+  cache: 'npm'
 
 
   -name:install deps
