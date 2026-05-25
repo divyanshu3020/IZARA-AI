@@ -41,3 +41,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ghcr.io/divyanshu3020/izara-ai:latest
+
+          
+      - name: trigger render deployment
+        run: |
+          curl -X POST https://api.render.com/deploy/srv-d8a9b03bc2fs73froqu0?key=hL8Yw5Ttzw8
