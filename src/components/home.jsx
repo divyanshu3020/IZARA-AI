@@ -17,7 +17,7 @@ const Home = () => {
 
       {/* Title */}
       <h1 className="minecraft-font text-4xl sm:text-5xl md:text-6xl drop-shadow-[0_0_25px_#22c55e] text-center mb-12">
-        Welcome to IZARA AI on render
+        Welcome 
       </h1>
 
       {/* Action Buttons */}
